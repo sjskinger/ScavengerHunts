@@ -13,5 +13,8 @@
     <string name="already_have_account">Already has account! Login here</string>
     <string name="person_name">Full Name</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_acct_info">AcctInfoActivity</string>
+    <string name="title_activity_owned_hunt">OwnedHuntActivity</string>
+    <string name="title_activity_participant_hunt">ParticipantHuntActivity</string>
 
 </resources>
