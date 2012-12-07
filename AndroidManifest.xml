@@ -30,6 +30,18 @@
             android:name="com.scavengerhunt.HomeActivity"
             android:label="@string/title_activity_home" >
         </activity>
+        <activity
+            android:name="com.scavengerhunt.AcctInfoActivity"
+            android:label="@string/title_activity_acct_info" >
+        </activity>
+        <activity
+            android:name="com.scavengerhunt.OwnedHuntActivity"
+            android:label="@string/title_activity_owned_hunt" >
+        </activity>
+        <activity
+            android:name="com.scavengerhunt.ParticipantHuntActivity"
+            android:label="@string/title_activity_participant_hunt" >
+        </activity>
     </application>
 
 </manifest>
