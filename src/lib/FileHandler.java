@@ -7,13 +7,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import android.util.Log;
+
 
 public class FileHandler {
 
 	public static boolean searchFile(FileInputStream fis, String searchStr) throws IOException{
+		System.out.println("searchString: " + searchStr);
 		BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 		String str = null;
+		Log.d("a", "************************************");
 		while((str = br.readLine()) != null) {
+			Log.d("b", str);
 			if(str.startsWith(searchStr)) {
 				return true;
 			}
@@ -22,7 +27,8 @@ public class FileHandler {
 	}
 	
 	public static void writeFile(FileOutputStream fos, String writeString) throws IOException {
-		DataOutputStream dos = new DataOutputStream(fos);
-		dos.writeChars(writeString);
+		Log.d("************************************", "msg");
+		Log.d("writeFile: ", writeString);
+		fos.write(writeString.getBytes());
 	}
 }

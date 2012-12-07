@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
 	TextView registerLink;
 	Button btnLogin;
 
-	static final String FILENAME = "login.file";
+	static final String FILENAME = "login.txt";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
