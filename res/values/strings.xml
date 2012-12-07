@@ -8,10 +8,10 @@
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register">Register</string>
     <string name="register">Register New Account</string>
     <string name="already_have_account">Already has account! Login here</string>
     <string name="person_name">Full Name</string>
-    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_home">Home</string>
 
 </resources>

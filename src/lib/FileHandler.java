@@ -1,7 +1,6 @@
 package lib;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,7 +11,7 @@ import android.util.Log;
 
 public class FileHandler {
 
-	public static boolean searchFile(FileInputStream fis, String searchStr) throws IOException{
+	public static String searchFile(FileInputStream fis, String searchStr) throws IOException{
 		System.out.println("searchString: " + searchStr);
 		BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 		String str = null;
@@ -20,10 +19,10 @@ public class FileHandler {
 		while((str = br.readLine()) != null) {
 			Log.d("b", str);
 			if(str.startsWith(searchStr)) {
-				return true;
+				return str;
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	public static void writeFile(FileOutputStream fos, String writeString) throws IOException {

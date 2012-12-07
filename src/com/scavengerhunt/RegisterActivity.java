@@ -34,7 +34,7 @@ public class RegisterActivity extends Activity {
             	 String fullname = fullnamebox.getText().toString();
             	 String email = emailbox.getText().toString();
             	 String password = passwordbox.getText().toString();
-            	 if(email == null || email.length() == 0 || email.matches("/^[_a-z0-9-+]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$/")) {
+            	 if(email == null || email.length() == 0 || !email.matches("/^[_a-z0-9-+]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$/")) {
             		 Toast.makeText(RegisterActivity.this, "Valid Email required!",Toast.LENGTH_LONG).show();
             		 return;
             	 }

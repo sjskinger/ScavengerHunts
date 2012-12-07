@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				
 				String search = txtUserName.getText().toString() + ":" + txtPassword.getText().toString();
-				boolean isValid = false;
+				String isValid = null;
 				try {
 					isValid = FileHandler.searchFile(openFileInput(FILENAME), search);
 				} catch (Exception e) {
@@ -45,9 +45,11 @@ public class MainActivity extends Activity {
 					e.printStackTrace();
 				}
 				
-				if(isValid){
+				if(isValid != null){
 					Toast.makeText(MainActivity.this, "Login Successful",Toast.LENGTH_LONG).show();
 					Intent home = new Intent(getApplicationContext(), HomeActivity.class);
+					home.putExtra("userInfo", isValid);
+					
 					startActivity(home);
 				} else{
 					Toast.makeText(MainActivity.this, "Invalid Login",Toast.LENGTH_LONG).show();
