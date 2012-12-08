@@ -2,7 +2,6 @@ package com.scavengerhunt;
 
 import java.util.ArrayList;
 
-import lib.FileHandler;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 

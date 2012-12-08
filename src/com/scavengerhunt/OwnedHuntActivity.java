@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.Toast;
 
 
 public class OwnedHuntActivity extends Activity{

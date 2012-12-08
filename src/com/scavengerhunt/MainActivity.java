@@ -1,6 +1,7 @@
 package com.scavengerhunt;
 
 import lib.FileHandler;
+import lib.ObjectHandler;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -27,7 +28,7 @@ public class MainActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+		new ObjectHandler(this.getApplicationContext());
 		txtUserName=(EditText)this.findViewById(R.id.emailBox);
 		txtPassword=(EditText)this.findViewById(R.id.passwordBox);
 		btnLogin=(Button)this.findViewById(R.id.btnLogin);
