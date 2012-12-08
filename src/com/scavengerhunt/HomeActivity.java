@@ -47,7 +47,7 @@ public class HomeActivity extends Activity {
 		//User me = (User)readObject()
 		mExpandableList = (ExpandableListView)findViewById(R.id.expandableListView);
 		
-		//groups = setGroups();
+		groups = setGroups();
 		adapter = new InExpandListAdapter(this, groups);
 		mExpandableList.setAdapter(adapter);
 		
