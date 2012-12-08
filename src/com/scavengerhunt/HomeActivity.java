@@ -2,9 +2,11 @@ package com.scavengerhunt;
 
 import java.util.ArrayList;
 
+
 import lib.ObjectHandler;
 import model.Hunt;
 import model.User;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,9 +17,9 @@ import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.Toast;
 
 public class HomeActivity extends Activity {
 	
@@ -34,6 +36,7 @@ public class HomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+
 
 		try{
 			Intent lastIntent = getIntent();
@@ -55,7 +58,6 @@ public class HomeActivity extends Activity {
 		groups = setGroups();
 		adapter = new InExpandListAdapter(this, groups);
 		mExpandableList.setAdapter(adapter);
-
 
 		createAHunt.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {

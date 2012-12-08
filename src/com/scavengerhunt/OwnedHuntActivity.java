@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+
 public class OwnedHuntActivity extends Activity{
 
 	private ExpandableListView mExpandableList;
