@@ -1,8 +1,14 @@
 package com.scavengerhunt;
 
-public class ExpandListChild {
+public class Child {
 	private String Name;
 	private String Tag;
+	
+	public Child(String name, String tag) {
+		super();
+		Name = name;
+		Tag = tag;
+	}
 
 	public String getName() {
 		return Name;

@@ -9,27 +9,26 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-public class ExpandListAdapter extends BaseExpandableListAdapter {
+public class InExpandListAdapter extends BaseExpandableListAdapter {
 
+	private Context context;
+	private ArrayList<Group> groups;
 
-	private LayoutInflater inflater;
-	private ArrayList<ExpandListGroup> groups;
-	
-	public ExpandListAdapter(Context context, ArrayList<ExpandListGroup> groups) {
-		inflater = LayoutInflater.from(context);
+	public InExpandListAdapter(Context context, ArrayList<Group> groups) {
+		this.context = context;
 		this.groups = groups;
 	}
 
-	public void addItem(ExpandListChild item, ExpandListGroup group) {
+	public void addChild(Child item, Group group) {
 		if (!groups.contains(group)) {
-			//groups.add(group);
+			groups.add(group);
 		}
 		int index = groups.indexOf(group);
-		ArrayList<ExpandListChild> ch = groups.get(index).getArrayChildren();
+		ArrayList<Child> ch = groups.get(index).getArrayChildren();
 		ch.add(item);
 		groups.get(index).setArrayChildren(ch);
 	}
-	
+
 	@Override
 	//counts the number of group/parent items so the list knows how many times calls getGroupView() method
 	public int getGroupCount() {
@@ -77,31 +76,28 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getChildView(int groupPosition, int childPosition,
-			boolean isLastChild, View view, ViewGroup parent) {
+	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
 		if (view == null) {
-			view = inflater.inflate(R.layout.expand_list_child, parent,false);
+			LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = inf.inflate(R.layout.in_expand_list_child, parent, false);
+
 		}
 
-		TextView textView = (TextView) view.findViewById(R.id.expand_list_child_text);
-		//"i" is the position of the parent/group in the list and 
-		//"i1" is the position of the child
-		textView.setText((CharSequence) groups.get(groupPosition).getArrayChildren().get(childPosition));
+		TextView textView = (TextView) view.findViewById(R.id.in_expand_list_child_text);
+		textView.setText(groups.get(groupPosition).getArrayChildren().get(childPosition).getName());
 
 		//return the entire view
 		return view;
 	}
 
 	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded,
-			View view, ViewGroup parent) {
+	public View getGroupView(int groupPosition, boolean isExpanded,View view, ViewGroup parent) {
+		LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View mview = inf.inflate(R.layout.expand_list_group, parent, false);
 
-		if (view == null) {
-			view = inflater.inflate(R.layout.expand_list_group, parent,false);
-		}
 
-		TextView textView = (TextView) view.findViewById(R.id.expand_list_group_text);
-		textView.setText(getGroup(groupPosition).toString());
-		return view;
+		TextView textView = (TextView) mview.findViewById(R.id.expand_list_group_text);
+		textView.setText(groups.get(groupPosition).getTitle());
+		return mview;
 	}
 }

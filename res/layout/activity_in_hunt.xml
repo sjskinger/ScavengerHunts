@@ -2,34 +2,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity" >
+    android:orientation="vertical"
+    android:padding="10sp"
+    tools:context=".InHuntActivity" >
 
     <TextView
-        android:id="@+id/welcomeString"
+        android:id="@+id/hunt_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="@string/hello_world" />
+        android:text="This is Hunt A!" />
 
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
+    <TextView
+        android:id="@+id/time_remaining_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/welcomeString"
-        android:layout_alignBottom="@+id/welcomeString"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="17dp"
-        android:text="Account" />
-    
-     <ExpandableListView
+        android:layout_below="@+id/hunt_name_text"
+        android:layout_centerHorizontal="true"
+        android:text="Time Remaining: " />
+
+    <ExpandableListView
         android:id="@+id/expandableListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button1"
+        android:layout_below="@+id/time_remaining_text"
         android:cacheColorHint="#00000000"
         android:fitsSystemWindows="false"
         android:listSelector="@android:color/transparent"
@@ -37,20 +35,14 @@
         android:transcriptMode="disabled" >
     </ExpandableListView>
 
-    <Button
-        android:id="@+id/buttonHuntsIOwn"
+    <TextView
+        android:id="@+id/host_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/expandableListView"
-        android:layout_toLeftOf="@+id/welcomeString"
-        android:text="Hunts I Own" />
-    
-        <Button
-        android:id="@+id/buttonHuntsImIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonHuntsIOwn"
-        android:layout_toLeftOf="@+id/welcomeString"
-        android:text="Hunts I'm In" />
+        android:layout_marginTop="20sp" >
+
+        <requestFocus />
+    </TextView>
 
 </RelativeLayout>
