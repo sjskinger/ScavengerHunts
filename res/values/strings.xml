@@ -16,6 +16,10 @@
     <string name="title_activity_acct_info">AcctInfo</string>
     <string name="title_activity_owned_hunt">OwnedHunt</string>
     <string name="title_activity_participant_hunt">ParticipantHunt</string>
-
-
+    <string name="title_activity_create_objective">Create an Objective</string>
+    <string name="objectiveName">Name of the Objective</string>
+    <string name="description">Description</string>
+    <string name="addPhotoGallery">Add photo from the gallery</string>
+    <string name="addPhotoCamera">Take photo from the camera</string>
+    <string name="create">Create</string>
 </resources>
