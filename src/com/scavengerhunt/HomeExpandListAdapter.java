@@ -77,16 +77,10 @@ public class HomeExpandListAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
-		if (view == null) {
-			LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = inf.inflate(R.layout.home_expand_list_child, parent, false);
-
-		}
-
+		LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		view = inf.inflate(R.layout.home_expand_list_child, parent, false);
 		TextView textView = (TextView) view.findViewById(R.id.home_expand_list_child_text);
 		textView.setText(groups.get(groupPosition).getArrayChildren().get(childPosition).getName());
-
-		//return the entire view
 		return view;
 	}
 
@@ -94,8 +88,6 @@ public class HomeExpandListAdapter extends BaseExpandableListAdapter {
 	public View getGroupView(int groupPosition, boolean isExpanded,View view, ViewGroup parent) {
 		LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View mview = inf.inflate(R.layout.expand_list_group, parent, false);
-
-
 		TextView textView = (TextView) mview.findViewById(R.id.expand_list_group_text);
 		textView.setText(groups.get(groupPosition).getTitle());
 		return mview;

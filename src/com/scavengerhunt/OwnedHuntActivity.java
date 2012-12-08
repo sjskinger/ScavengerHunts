@@ -63,7 +63,7 @@ public class OwnedHuntActivity extends Activity{
 
 		mExpandableList.setOnChildClickListener(new OnChildClickListener() {
 			@Override
-			public boolean onChildClick(ExpandableListView arg0, View arg1, int arg2, int arg3, long arg4)
+			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
 			{
 				return false;
 			}
@@ -79,7 +79,7 @@ public class OwnedHuntActivity extends Activity{
 	}
 
 	public ArrayList<Group> setGroups() {
-		ArrayList<Group> groupList = new ArrayList<Group>();
+		/*ArrayList<Group> groupList = new ArrayList<Group>();
 		ArrayList<Child> childList = new ArrayList<Child>();
 
 		Group gru1 = new Group();
@@ -108,7 +108,8 @@ public class OwnedHuntActivity extends Activity{
 
 		groupList.add(gru1);
 		groupList.add(gru2);
-		return groupList;
+		return groupList;*/
+		return null;
 	}
 }
 

@@ -2,12 +2,13 @@ package com.scavengerhunt;
 
 import java.util.ArrayList;
 
-import lib.FileHandler;
+import lib.ObjectHandler;
+import model.Hunt;
+import model.User;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,80 +20,60 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 
 public class HomeActivity extends Activity {
+	
 	private ExpandableListView mExpandableList;
 	private ExpandableListAdapter adapter;
 	private ArrayList<Group> groups;
-
+	ObjectHandler handler;
+	User user;
 	Button huntsIOwn;
 	Button huntsImIn;
 	Button createAHunt;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		
-		Intent lastIntent = getIntent();
-		String userInfo = (String) lastIntent.getExtras().get("userInfo");
+
+		try{
+			Intent lastIntent = getIntent();
+			user = (User) lastIntent.getSerializableExtra("user");
+			handler = (ObjectHandler) lastIntent.getSerializableExtra("handler");
+
+			TextView welcome = (TextView)this.findViewById(R.id.welcomeString);
+			welcome.setTextColor(Color.BLUE);
+			welcome.setText("Welcome, "+user.getName());
+		}catch (NullPointerException e){
+			return;
+		}
 
 		huntsIOwn=(Button)this.findViewById(R.id.buttonHuntsIOwn);
 		huntsImIn=(Button)this.findViewById(R.id.buttonHuntsImIn);
 		createAHunt=(Button)this.findViewById(R.id.create_hunt);
-		
-		TextView welcome = (TextView)this.findViewById(R.id.welcomeString);
-		char[] name = ("Welcome, " + userInfo.substring(userInfo.lastIndexOf(':')+1)).toCharArray();
-		welcome.setTextColor(Color.BLUE);
-		welcome.setText(name, 0, name.length);
 
-		//User me = (User)readObject()
 		mExpandableList = (ExpandableListView)findViewById(R.id.expandableListView);
-		
 		groups = setGroups();
 		adapter = new InExpandListAdapter(this, groups);
 		mExpandableList.setAdapter(adapter);
-		
 
-/* 		
-		huntsIOwn=(Button)this.findViewById(R.id.buttonHuntsIOwn);
-		huntsImIn=(Button)this.findViewById(R.id.buttonHuntsImIn);
 
 		createAHunt.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				//create a new instance of a hunt here 
 				Intent create = new Intent(getApplicationContext(), OwnedHuntActivity.class);
 				startActivity(create);
 			}
 		});  
 
-		huntsIOwn.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent gotoHuntsIOwn = new Intent(getApplicationContext(), OwnedHuntActivity.class);
-				startActivity(gotoHuntsIOwn);
-			}
-		});     
-		huntsImIn.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent gotoHuntsImIn = new Intent(getApplicationContext(), InHuntActivity.class);
-				startActivity(gotoHuntsImIn);
-			}
-		});     
-*/
-
-
 		mExpandableList.setOnChildClickListener(new OnChildClickListener() {
-
 			@Override
-			public boolean onChildClick(ExpandableListView arg0, View arg1, int arg2, int arg3, long arg4)
-			{
+			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 				return false;
 			}
 		});
-
-		mExpandableList.setOnGroupClickListener(new OnGroupClickListener()
-		{
+		
+		mExpandableList.setOnGroupClickListener(new OnGroupClickListener() {
 			@Override
-			public boolean onGroupClick(ExpandableListView parent, View v,
-					int groupPosition, long id) {
+			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 				return false;
 			}
 		});
@@ -100,42 +81,33 @@ public class HomeActivity extends Activity {
 
 	public ArrayList<Group> setGroups() {
 		ArrayList<Group> groupList = new ArrayList<Group>();
-		ArrayList<Child> childList = new ArrayList<Child>();
+		ArrayList<Child> ownChildList = new ArrayList<Child>();
+		ArrayList<Child> inChildList = new ArrayList<Child>();
 
-		Group gru1 = new Group();
-		gru1.setTitle("Hunts I'm In");
-		Child ch1_1 = new Child("CMU Search", "1");
-		Child ch1_2 = new Child("Name that Professor", "2");
-		childList.add(ch1_1);
-		childList.add(ch1_2);
-		gru1.setArrayChildren(childList);
+		Group huntsImIn = new Group();
+		huntsImIn.setTitle("Hunts I'm In");
+		Group huntsIOwn = new Group();
+		huntsIOwn.setTitle("Hunts I Own");
+		
+		try{
+			int [] hunts = user.getHuntsId();
+			for(int id : hunts){
+				Hunt h = (Hunt) handler.readObject("string", id);				
+				Child ch = new Child(h.getName(), h.getId());
+				if(user.getId() == h.getHostId()) ownChildList.add(ch);
+				else inChildList.add(ch);
+			}
 
+			huntsImIn.setArrayChildren(inChildList);
+			huntsIOwn.setArrayChildren(ownChildList);
+			groupList.add(huntsImIn);
+			groupList.add(huntsIOwn);
 
-		Group gru2 = new Group();
-		childList = new ArrayList<Child>();
-		gru2.setTitle("Hunts I Own");
-		Child ch2_1 = new Child("Squirrel Hill", "1");
-		Child ch2_2 = new Child("Craig Street", "2");
-		Child ch2_3 = new Child("Hunt Library", "3");
-		Child ch2_4 = new Child("ECE Day", "4");
-		Child ch2_5 = new Child("Spring Carnival", "5");
-		childList.add(ch2_1);
-		childList.add(ch2_2);
-		childList.add(ch2_3);
-		childList.add(ch2_4);
-		childList.add(ch2_5);
-		gru2.setArrayChildren(childList);
-
-		groupList.add(gru1);
-		groupList.add(gru2);
+		} catch(NullPointerException e) {
+			Toast.makeText(HomeActivity.this, "An error has occured. Try again.",Toast.LENGTH_LONG).show();
+			return null;
+		} 
 		return groupList;
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_home, menu);
-		return true;
 	}
 
 }

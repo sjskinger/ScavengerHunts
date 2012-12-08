@@ -48,7 +48,7 @@ public class InHuntActivity extends Activity {
 	}
 
 	public ArrayList<Group> setGroups() {
-		ArrayList<Group> groupList = new ArrayList<Group>();
+		/*ArrayList<Group> groupList = new ArrayList<Group>();
 		ArrayList<Child> childList = new ArrayList<Child>();
 		
 		Group gru1 = new Group();
@@ -78,6 +78,8 @@ public class InHuntActivity extends Activity {
 		groupList.add(gru1);
 		groupList.add(gru2);
 		return groupList;
+		*/
+		return null;
 	}
 
 
