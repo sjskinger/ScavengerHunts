@@ -2,12 +2,12 @@ package com.scavengerhunt;
 
 public class Child {
 	private String Name;
-	private String Tag;
+	private int Tag;
 	
-	public Child(String name, String tag) {
+	public Child(String name, int i) {
 		super();
 		Name = name;
-		Tag = tag;
+		Tag = i;
 	}
 
 	public String getName() {
@@ -18,11 +18,11 @@ public class Child {
 		this.Name = Name;
 	}
 
-	public String getTag() {
+	public int getTag() {
 		return Tag;
 	}
 
-	public void setTag(String Tag) {
+	public void setTag(int Tag) {
 		this.Tag = Tag;
 	}
 
