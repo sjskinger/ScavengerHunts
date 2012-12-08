@@ -12,12 +12,15 @@ public class Hunt implements Serializable{
 	private float duration;
 	private int[] participantId;
 	private int[] objectiveId;
+	public static int count = 0;
+	
+	public Hunt() {
+		count++;
+		id = count;
+	}
 	
 	public int getId() {
 		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getName() {
 		return name;

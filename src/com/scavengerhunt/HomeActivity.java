@@ -2,6 +2,8 @@ package com.scavengerhunt;
 
 import java.util.ArrayList;
 
+import model.User;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -28,7 +30,7 @@ public class HomeActivity extends Activity {
 		setContentView(R.layout.activity_home);
 		//Got the user info
 		Intent lastIntent = getIntent();
-		String userInfo = (String) lastIntent.getExtras().get("userInfo");
+		User userInfo = (User) lastIntent.getExtras().get("userInfo");
 		huntsIOwn=(Button)this.findViewById(R.id.buttonHuntsIOwn);
 		huntsImIn=(Button)this.findViewById(R.id.buttonHuntsImIn);
 		TextView welcome = (TextView)this.findViewById(R.id.welcomeString);
@@ -37,7 +39,7 @@ public class HomeActivity extends Activity {
 		adapter = new InExpandListAdapter(this, groups);
 		mExpandableList.setAdapter(adapter);
 
-		char[] name = ("Welcome, " + userInfo.substring(userInfo.lastIndexOf(':')+1)).toCharArray();
+		char[] name = ("Welcome, " + userInfo.getName()).toCharArray();
 		welcome.setTextColor(Color.BLUE);
 		welcome.setText(name, 0, name.length);
 

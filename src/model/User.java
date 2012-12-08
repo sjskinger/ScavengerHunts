@@ -10,12 +10,22 @@ public class User implements Serializable {
 	private String email;
 	private String password;
 	private int[] huntsId;
+	public static int count = 0;
 	
+	public User() {
+		count++;
+		this.id = count;
+	}
+	
+	public User(String name, String email, String password) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
+
 	public int getId() {
 		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getName() {
 		return name;

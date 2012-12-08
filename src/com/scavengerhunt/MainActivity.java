@@ -1,7 +1,7 @@
 package com.scavengerhunt;
 
-import lib.FileHandler;
 import lib.ObjectHandler;
+import model.User;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -20,15 +20,16 @@ public class MainActivity extends Activity {
 	EditText txtPassword;
 	TextView registerLink;
 	Button btnLogin;
-
-	static final String FILENAME = "login.txt";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		new ObjectHandler(this.getApplicationContext());
+		
+		final ObjectHandler objHandler = new ObjectHandler();
+		
+		
 		txtUserName=(EditText)this.findViewById(R.id.emailBox);
 		txtPassword=(EditText)this.findViewById(R.id.passwordBox);
 		btnLogin=(Button)this.findViewById(R.id.btnLogin);
@@ -37,23 +38,19 @@ public class MainActivity extends Activity {
 		btnLogin.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				
-				String search = txtUserName.getText().toString() + ":" + txtPassword.getText().toString();
-				String isValid = null;
-				try {
-					isValid = FileHandler.searchFile(openFileInput(FILENAME), search);
-				} catch (Exception e) {
-					Toast.makeText(MainActivity.this, "An error has occured. Try again.",Toast.LENGTH_LONG).show();
-					e.printStackTrace();
-				}
-				
-				if(isValid != null){
+				String email = txtUserName.getText().toString();
+				String pwd = txtPassword.getText().toString();
+				//Search for the user.
+				User u = objHandler.searchUser(email);
+				if(u != null && u.getPassword().equals(pwd)){
 					Toast.makeText(MainActivity.this, "Login Successful",Toast.LENGTH_LONG).show();
 					Intent home = new Intent(getApplicationContext(), HomeActivity.class);
-					home.putExtra("userInfo", isValid);
+					home.putExtra("objectHandler", objHandler);	
+					home.putExtra("userInfo", u);
 					
 					startActivity(home);
 				} else{
-					Toast.makeText(MainActivity.this, "Invalid Login",Toast.LENGTH_LONG).show();
+					Toast.makeText(MainActivity.this, "Invalid Login Info",Toast.LENGTH_LONG).show();
 				}
 			}
 		});     
@@ -61,6 +58,7 @@ public class MainActivity extends Activity {
 		registerLink.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent register = new Intent(getApplicationContext(), RegisterActivity.class);
+				register.putExtra("objectHandler", objHandler);
 				startActivity(register);
 			}
 		});

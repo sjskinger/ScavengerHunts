@@ -12,12 +12,15 @@ public class Objective implements Serializable {
 	private String description;
 	private Uri uri;
 	private int huntId;
+	public static int count = 0;
+	
+	public Objective () {
+		count++;
+		id = count;
+	}
 	
 	public int getId() {
 		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getName() {
 		return name;

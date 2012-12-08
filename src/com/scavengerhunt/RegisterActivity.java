@@ -1,12 +1,10 @@
 package com.scavengerhunt;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import lib.FileHandler;
+import lib.ObjectHandler;
+import model.User;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +20,8 @@ public class RegisterActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
+		Intent i = getIntent();
+		final ObjectHandler o = (ObjectHandler) i.getSerializableExtra("objectHandler");
 		
 		fullnamebox = (EditText)this.findViewById(R.id.fullNameBox);
 		emailbox = (EditText)this.findViewById(R.id.reg_emailBox);
@@ -34,7 +34,7 @@ public class RegisterActivity extends Activity {
             	 String fullname = fullnamebox.getText().toString();
             	 String email = emailbox.getText().toString();
             	 String password = passwordbox.getText().toString();
-            	 if(email == null || email.length() == 0) {
+            	 if(email == null || email.length() == 0 || !email.matches("[a-zA-Z_\\.0-9]+@[a-zA-Z]+\\.[a-zA-Z\\.]{2,6}")) {
             		 Toast.makeText(RegisterActivity.this, "Valid Email required!",Toast.LENGTH_LONG).show();
             		 return;
             	 }
@@ -45,25 +45,12 @@ public class RegisterActivity extends Activity {
             	if(password == null || password.length() < 4) {
             		 Toast.makeText(RegisterActivity.this, "Password must be atleast 4 characters!",Toast.LENGTH_LONG).show();
             		 return;
-            	 }
-            	 
-            	 String reg_string = email+":"+password+":"+fullname+"\n";
-            	 
-            	 try {
-            		 
-            	 FileOutputStream fos = openFileOutput(MainActivity.FILENAME, MODE_APPEND);
-				 FileHandler.writeFile(fos, reg_string );
-            	 
-            	 } catch(FileNotFoundException e) {
-            		 Toast.makeText(RegisterActivity.this, "An error has occured. Try again.",Toast.LENGTH_LONG).show();
-            		 return;
-            	 } catch(IOException e) {
-					 Toast.makeText(RegisterActivity.this, "Could not register! Try again!",Toast.LENGTH_LONG).show();
-					 return;
-				 }
-            	 
-            	 Toast.makeText(RegisterActivity.this, "You are now registered!",Toast.LENGTH_LONG).show();
-            	 finish();
+            	}
+            	User u = new User(fullname, email, password);        	 
+            	o.writeObject(ObjectHandler.DATATYPE_USER, u.getId(), u);
+            	
+            	Toast.makeText(RegisterActivity.this, "You are now registered!",Toast.LENGTH_LONG).show();
+            	finish();
             }
         });
 	}
