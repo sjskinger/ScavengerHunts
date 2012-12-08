@@ -2,13 +2,15 @@ package model;
 
 import java.io.Serializable;
 
+import android.text.format.Time;
+
 public class Hunt implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private int hostId;
-	private int timeStarted;
+	private Time timeStarted;
 	private float duration;
 	private int[] participantId;
 	private int[] objectiveId;
@@ -34,11 +36,11 @@ public class Hunt implements Serializable{
 	public void setHostId(int hostId) {
 		this.hostId = hostId;
 	}
-	public int getTimeStarted() {
+	public Time getTimeStarted() {
 		return timeStarted;
 	}
-	public void setTimeStarted(int timeStarted) {
-		this.timeStarted = timeStarted;
+	public void setTimeStarted(Time today) {
+		this.timeStarted = today;
 	}
 	public float getDuration() {
 		return duration;

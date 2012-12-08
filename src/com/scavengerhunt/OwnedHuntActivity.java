@@ -4,12 +4,17 @@ import adapters.OwnedExpandListAdapter;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.text.format.Time;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ExpandableListView;
 import java.util.ArrayList;
 
+import lib.ObjectHandler;
+import model.Child;
 import model.Group;
+import model.Hunt;
+import model.User;
 import android.os.CountDownTimer;
 
 import android.widget.Button;
@@ -20,7 +25,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
 public class OwnedHuntActivity extends Activity{
 
 	private ExpandableListView mExpandableList;
@@ -29,12 +33,32 @@ public class OwnedHuntActivity extends Activity{
 	TextView timer;
 	Button createObjective;
 	Button startHunt;
+	ObjectHandler handler;
+	User user;
+	Time time;
+	int huntID;
+	private Hunt hunt;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_owned_hunt);
 
+		try{
+			Intent lastIntent = getIntent();
+			user = (User) lastIntent.getSerializableExtra("userInfo");
+			handler = (ObjectHandler) lastIntent.getSerializableExtra("objectHandler");
+			huntID = lastIntent.getIntExtra("huntID", 0);
+
+		}catch (NullPointerException e){
+			return;
+		}
+		
+		if (huntID == -1) {
+			Hunt hunt = new Hunt();
+		}
+		else hunt = (Hunt) handler.readObject("hunt", huntID);	
+		
 		createObjective=(Button)this.findViewById(R.id.add_objective_button);
 		startHunt=(Button)this.findViewById(R.id.start_hunt_button);
 		timer=(TextView)this.findViewById(R.id.time_remaining_text);
@@ -45,8 +69,21 @@ public class OwnedHuntActivity extends Activity{
 
 		startHunt.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Toast mess = Toast.makeText(OwnedHuntActivity.this, "Let the Hunt Begin!", Toast.LENGTH_SHORT);
-				mess.show();
+				time = new Time(Time.getCurrentTimezone());
+				time.setToNow();
+				
+				if ((hunt.getObjectiveId().length < 1)||(hunt.getParticipantId().length < 2)){
+					Toast.makeText(OwnedHuntActivity.this, "A hunt must have at least one objective and two participants!", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				if (hunt.getTimeStarted().before(time)){
+					Toast.makeText(OwnedHuntActivity.this, "This hunt has already started!", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				
+				Toast.makeText(OwnedHuntActivity.this, "Let the Hunt Begin!", Toast.LENGTH_SHORT).show();
+				time.setToNow();
+				hunt.setTimeStarted(time);
 				new CountDownTimer(30000, 1000) {
 					public void onTick(long millisUntilFinished) {
 						timer.setText("seconds remaining: " + millisUntilFinished / 1000);
@@ -83,38 +120,39 @@ public class OwnedHuntActivity extends Activity{
 	}
 
 	public ArrayList<Group> setGroups() {
-		/*ArrayList<Group> groupList = new ArrayList<Group>();
-		ArrayList<Child> childList = new ArrayList<Child>();
+		ArrayList<Group> groupList = new ArrayList<Group>();
+		ArrayList<Child> ownChildList = new ArrayList<Child>();
+		ArrayList<Child> inChildList = new ArrayList<Child>();
 
-		Group gru1 = new Group();
-		gru1.setTitle("Objectives");
-		Child ch1_1 = new Child("Scottie Dog", "1");
-		Child ch1_2 = new Child("Helicopter", "2");
-		childList.add(ch1_1);
-		childList.add(ch1_2);
-		gru1.setArrayChildren(childList);
+		Group huntsImIn = new Group();
+		huntsImIn.setTitle("Objectives");
+		Group huntsIOwn = new Group();
+		huntsIOwn.setTitle("Participants");
+
+		try{
+			int [] hunts = user.getHuntsId();
+			if(hunts != null){
+				for(int id : hunts){
+					Hunt h = (Hunt) handler.readObject("string", id);				
+					Child ch = new Child(h.getName(), h.getId());
+					if(user.getId() == h.getHostId()) ownChildList.add(ch);
+					else inChildList.add(ch);
+				}
+				huntsImIn.setArrayChildren(inChildList);
+				huntsIOwn.setArrayChildren(ownChildList);
+			}
 
 
-		Group gru2 = new Group();
-		childList = new ArrayList<Child>();
-		gru2.setTitle("Participants");
-		Child ch2_1 = new Child("Joe Buddy", "1");
-		Child ch2_2 = new Child("Sarah Smith", "2");
-		Child ch2_3 = new Child("Bob Singh", "3");
-		Child ch2_4 = new Child("Kelly Jones", "4");
-		Child ch2_5 = new Child("Jim Bob", "5");
-		childList.add(ch2_1);
-		childList.add(ch2_2);
-		childList.add(ch2_3);
-		childList.add(ch2_4);
-		childList.add(ch2_5);
-		gru2.setArrayChildren(childList);
+			groupList.add(huntsImIn);
+			groupList.add(huntsIOwn);
 
-		groupList.add(gru1);
-		groupList.add(gru2);
-		return groupList;*/
-		return null;
+		} catch(NullPointerException e) {
+			Toast.makeText(OwnedHuntActivity.this, "An error has occured. Try again.",Toast.LENGTH_LONG).show();
+			return null;
+		} 
+		return groupList;
 	}
+
 }
 
 

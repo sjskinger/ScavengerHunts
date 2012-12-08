@@ -45,7 +45,11 @@ public class InExpandListAdapter extends BaseExpandableListAdapter {
 	@Override
 	//counts the number of children items so the list knows how many times calls getChildView() method
 	public int getChildrenCount(int i) {
-		return groups.get(i).getArrayChildren().size();
+		try{
+			return groups.get(i).getArrayChildren().size();
+		}catch (NullPointerException e){
+			return 0;
+		}
 	}
 
 	@Override
@@ -87,24 +91,23 @@ public class InExpandListAdapter extends BaseExpandableListAdapter {
 		if (view == null) {
 			LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = inf.inflate(R.layout.in_expand_list_child, parent, false);
-
 		}
 
 		TextView textView = (TextView) view.findViewById(R.id.in_expand_list_child_text);
 		textView.setText(groups.get(groupPosition).getArrayChildren().get(childPosition).getName());
 
-		//return the entire view
 		return view;
 	}
 
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded,View view, ViewGroup parent) {
-		LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View mview = inf.inflate(R.layout.expand_list_group, parent, false);
+		if (view == null){
+			LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = inf.inflate(R.layout.expand_list_group, parent, false);
+		}
 
-
-		TextView textView = (TextView) mview.findViewById(R.id.expand_list_group_text);
+		TextView textView = (TextView) view.findViewById(R.id.expand_list_group_text);
 		textView.setText(groups.get(groupPosition).getTitle());
-		return mview;
+		return view;
 	}
 }

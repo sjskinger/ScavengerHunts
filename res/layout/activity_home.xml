@@ -45,20 +45,5 @@
         android:layout_centerHorizontal="true"
         android:text="Create A Hunt" />
 
-    <Button
-        android:id="@+id/buttonHuntsIOwn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/create_hunt"
-        android:layout_toLeftOf="@+id/welcomeString"
-        android:text="Hunts I Own" />
-
-    <Button
-        android:id="@+id/buttonHuntsImIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonHuntsIOwn"
-        android:layout_toLeftOf="@+id/welcomeString"
-        android:text="Hunts I&apos;m In" />
 
 </RelativeLayout>

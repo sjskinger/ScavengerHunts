@@ -43,7 +43,11 @@ public class OwnedExpandListAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public int getChildrenCount(int i) {
-		return groups.get(i).getArrayChildren().size();
+		try{
+			return groups.get(i).getArrayChildren().size();
+		}catch (NullPointerException e){
+			return 0;
+		}
 	}
 
 	@Override
@@ -80,8 +84,10 @@ public class OwnedExpandListAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
-		LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		view = inf.inflate(R.layout.owned_expand_list_child, parent, false);
+		if (view == null){
+			LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = inf.inflate(R.layout.owned_expand_list_child, parent, false);
+		}
 		TextView textView = (TextView) view.findViewById(R.id.owned_expand_list_child_text);
 		textView.setText(groups.get(groupPosition).getArrayChildren().get(childPosition).getName());
 		return view;
@@ -89,10 +95,13 @@ public class OwnedExpandListAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public View getGroupView(int groupPosition, boolean isExpanded,View view, ViewGroup parent) {
-		LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View mview = inf.inflate(R.layout.expand_list_group, parent, false);
-		TextView textView = (TextView) mview.findViewById(R.id.expand_list_group_text);
+		if (view == null){
+			LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = inf.inflate(R.layout.expand_list_group, parent, false);
+		}
+
+		TextView textView = (TextView) view.findViewById(R.id.expand_list_group_text);
 		textView.setText(groups.get(groupPosition).getTitle());
-		return mview;
+		return view;
 	}
 }

@@ -53,8 +53,6 @@ public class HomeActivity extends Activity {
 			return;
 		}
 
-		huntsIOwn=(Button)this.findViewById(R.id.buttonHuntsIOwn);
-		huntsImIn=(Button)this.findViewById(R.id.buttonHuntsImIn);
 		createAHunt=(Button)this.findViewById(R.id.create_hunt);
 
 		mExpandableList = (ExpandableListView)findViewById(R.id.expandableListView);
@@ -64,15 +62,35 @@ public class HomeActivity extends Activity {
 
 		createAHunt.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				//Intent create = new Intent(getApplicationContext(), OwnedHuntActivity.class);
-				//startActivity(create);
+				Intent create = new Intent(getApplicationContext(), OwnedHuntActivity.class);
+				create.putExtra("huntID", -1);
+				create.putExtra("objectHandler", handler);	
+				create.putExtra("userInfo", user);
+				startActivity(create);
 			}
 		});  
 
 		mExpandableList.setOnChildClickListener(new OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-				return false;
+				Group g = (Group) adapter.getGroup(groupPosition);
+				Child c = (Child) adapter.getChild(groupPosition, childPosition);
+				if (g.getTitle().equals("Hunts I Own")){
+					Intent gotoHunt = new Intent(getApplicationContext(), OwnedHuntActivity.class);
+					gotoHunt.putExtra("huntID", c.getTag());
+					gotoHunt.putExtra("objectHandler", handler);	
+					gotoHunt.putExtra("userInfo", user);
+					startActivity(gotoHunt);
+				}
+				else{
+					Intent gotoHunt = new Intent(getApplicationContext(), InHuntActivity.class);
+					gotoHunt.putExtra("huntID", c.getTag());
+					gotoHunt.putExtra("objectHandler", handler);	
+					gotoHunt.putExtra("userInfo", user);
+					startActivity(gotoHunt);
+					
+				}
+				return true;
 			}
 		});
 
@@ -98,7 +116,7 @@ public class HomeActivity extends Activity {
 			int [] hunts = user.getHuntsId();
 			if(hunts != null){
 				for(int id : hunts){
-					Hunt h = (Hunt) handler.readObject("string", id);				
+					Hunt h = (Hunt) handler.readObject("user", id);				
 					Child ch = new Child(h.getName(), h.getId());
 					if(user.getId() == h.getHostId()) ownChildList.add(ch);
 					else inChildList.add(ch);
