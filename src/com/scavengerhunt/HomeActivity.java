@@ -40,8 +40,8 @@ public class HomeActivity extends Activity {
 
 		try{
 			Intent lastIntent = getIntent();
-			user = (User) lastIntent.getSerializableExtra("user");
-			handler = (ObjectHandler) lastIntent.getSerializableExtra("handler");
+			user = (User) lastIntent.getSerializableExtra("userInfo");
+			handler = (ObjectHandler) lastIntent.getSerializableExtra("objectHandler");
 
 			TextView welcome = (TextView)this.findViewById(R.id.welcomeString);
 			welcome.setTextColor(Color.BLUE);
