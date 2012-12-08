@@ -39,7 +39,7 @@
             android:label="@string/title_activity_owned_hunt" >
         </activity>
         <activity
-            android:name="com.scavengerhunt.ParticipantHuntActivity"
+            android:name="com.scavengerhunt.InHuntActivity"
             android:label="@string/title_activity_participant_hunt" >
         </activity>
     </application>
