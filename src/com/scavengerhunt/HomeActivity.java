@@ -22,8 +22,10 @@ public class HomeActivity extends Activity {
 	private ExpandableListView mExpandableList;
 	private ExpandableListAdapter adapter;
 	private ArrayList<Group> groups;
-	//Button huntsIOwn;
-	//Button huntsImIn;
+
+	Button huntsIOwn;
+	Button huntsImIn;
+	Button createAHunt;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,11 @@ public class HomeActivity extends Activity {
 		
 		Intent lastIntent = getIntent();
 		String userInfo = (String) lastIntent.getExtras().get("userInfo");
+
+		huntsIOwn=(Button)this.findViewById(R.id.buttonHuntsIOwn);
+		huntsImIn=(Button)this.findViewById(R.id.buttonHuntsImIn);
+		createAHunt=(Button)this.findViewById(R.id.create_hunt);
+		
 		TextView welcome = (TextView)this.findViewById(R.id.welcomeString);
 		char[] name = ("Welcome, " + userInfo.substring(userInfo.lastIndexOf(':')+1)).toCharArray();
 		welcome.setTextColor(Color.BLUE);
@@ -48,6 +55,15 @@ public class HomeActivity extends Activity {
 /* 		
 		huntsIOwn=(Button)this.findViewById(R.id.buttonHuntsIOwn);
 		huntsImIn=(Button)this.findViewById(R.id.buttonHuntsImIn);
+
+		createAHunt.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				//create a new instance of a hunt here 
+				Intent create = new Intent(getApplicationContext(), OwnedHuntActivity.class);
+				startActivity(create);
+			}
+		});  
+
 		huntsIOwn.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent gotoHuntsIOwn = new Intent(getApplicationContext(), OwnedHuntActivity.class);
