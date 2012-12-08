@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 
 import lib.ObjectHandler;
+import model.Child;
+import model.Group;
 import model.Hunt;
 import model.User;
 
+import adapters.InExpandListAdapter;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +25,7 @@ import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.Toast;
 
 public class HomeActivity extends Activity {
-	
+
 	private ExpandableListView mExpandableList;
 	private ExpandableListAdapter adapter;
 	private ArrayList<Group> groups;
@@ -61,8 +64,8 @@ public class HomeActivity extends Activity {
 
 		createAHunt.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent create = new Intent(getApplicationContext(), OwnedHuntActivity.class);
-				startActivity(create);
+				//Intent create = new Intent(getApplicationContext(), OwnedHuntActivity.class);
+				//startActivity(create);
 			}
 		});  
 
@@ -72,7 +75,7 @@ public class HomeActivity extends Activity {
 				return false;
 			}
 		});
-		
+
 		mExpandableList.setOnGroupClickListener(new OnGroupClickListener() {
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
@@ -90,18 +93,21 @@ public class HomeActivity extends Activity {
 		huntsImIn.setTitle("Hunts I'm In");
 		Group huntsIOwn = new Group();
 		huntsIOwn.setTitle("Hunts I Own");
-		
+
 		try{
 			int [] hunts = user.getHuntsId();
-			for(int id : hunts){
-				Hunt h = (Hunt) handler.readObject("string", id);				
-				Child ch = new Child(h.getName(), h.getId());
-				if(user.getId() == h.getHostId()) ownChildList.add(ch);
-				else inChildList.add(ch);
+			if(hunts != null){
+				for(int id : hunts){
+					Hunt h = (Hunt) handler.readObject("string", id);				
+					Child ch = new Child(h.getName(), h.getId());
+					if(user.getId() == h.getHostId()) ownChildList.add(ch);
+					else inChildList.add(ch);
+				}
+				huntsImIn.setArrayChildren(inChildList);
+				huntsIOwn.setArrayChildren(ownChildList);
 			}
 
-			huntsImIn.setArrayChildren(inChildList);
-			huntsIOwn.setArrayChildren(ownChildList);
+
 			groupList.add(huntsImIn);
 			groupList.add(huntsIOwn);
 

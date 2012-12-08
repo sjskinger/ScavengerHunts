@@ -2,6 +2,9 @@ package com.scavengerhunt;
 
 import java.util.ArrayList;
 
+import model.Group;
+
+import adapters.InExpandListAdapter;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;

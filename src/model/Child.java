@@ -1,4 +1,4 @@
-package com.scavengerhunt;
+package model;
 
 public class Child {
 	private String Name;

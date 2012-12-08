@@ -1,6 +1,13 @@
-package com.scavengerhunt;
+package adapters;
 
 import java.util.ArrayList;
+
+import com.scavengerhunt.R;
+import com.scavengerhunt.R.id;
+import com.scavengerhunt.R.layout;
+
+import model.Child;
+import model.Group;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,12 +16,12 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-public class HomeExpandListAdapter extends BaseExpandableListAdapter {
+public class InExpandListAdapter extends BaseExpandableListAdapter {
 
 	private Context context;
 	private ArrayList<Group> groups;
 
-	public HomeExpandListAdapter(Context context, ArrayList<Group> groups) {
+	public InExpandListAdapter(Context context, ArrayList<Group> groups) {
 		this.context = context;
 		this.groups = groups;
 	}
@@ -77,10 +84,16 @@ public class HomeExpandListAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
-		LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		view = inf.inflate(R.layout.home_expand_list_child, parent, false);
-		TextView textView = (TextView) view.findViewById(R.id.home_expand_list_child_text);
+		if (view == null) {
+			LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = inf.inflate(R.layout.in_expand_list_child, parent, false);
+
+		}
+
+		TextView textView = (TextView) view.findViewById(R.id.in_expand_list_child_text);
 		textView.setText(groups.get(groupPosition).getArrayChildren().get(childPosition).getName());
+
+		//return the entire view
 		return view;
 	}
 
@@ -88,6 +101,8 @@ public class HomeExpandListAdapter extends BaseExpandableListAdapter {
 	public View getGroupView(int groupPosition, boolean isExpanded,View view, ViewGroup parent) {
 		LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View mview = inf.inflate(R.layout.expand_list_group, parent, false);
+
+
 		TextView textView = (TextView) mview.findViewById(R.id.expand_list_group_text);
 		textView.setText(groups.get(groupPosition).getTitle());
 		return mview;

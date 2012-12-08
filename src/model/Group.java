@@ -1,6 +1,7 @@
-package com.scavengerhunt;
+package model;
 
 import java.util.ArrayList;
+
 
 public class Group {
 	private String mTitle;

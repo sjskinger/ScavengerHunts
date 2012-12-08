@@ -1,5 +1,6 @@
 package com.scavengerhunt;
 
+import adapters.OwnedExpandListAdapter;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ExpandableListView;
 import java.util.ArrayList;
+
+import model.Group;
 import android.os.CountDownTimer;
 
 import android.widget.Button;
