@@ -6,21 +6,23 @@
     android:padding="10sp"
     tools:context=".OwnedHuntActivity" >
 
-    <TextView
+    <EditText
         android:id="@+id/hunt_name_text"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="This is Hunt A!" />
+        android:background="@android:color/transparent"
+        android:hint="Name Your Hunt"
+        android:inputType="text" >
+    </EditText>
 
     <TextView
         android:id="@+id/time_remaining_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/hunt_name_text"
-        android:layout_centerHorizontal="true"
-        android:text="Time Remaining: " />
+        android:layout_centerHorizontal="true" />
 
     <ExpandableListView
         android:id="@+id/expandableListView"
@@ -56,7 +58,7 @@
         android:layout_below="@+id/add_participant_box"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5sp"
-        android:text="Add Participant" />
+        android:text="Add New Participant" />
 
     <Button
         android:id="@+id/add_objective_button"
@@ -65,7 +67,7 @@
         android:layout_below="@+id/add_participant_button"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5sp"
-        android:text="Add Objective" />
+        android:text="Create New Objective" />
 
     <Button
         android:id="@+id/set_time_button"

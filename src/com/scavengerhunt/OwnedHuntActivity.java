@@ -2,12 +2,18 @@ package com.scavengerhunt;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ExpandableListView;
 import java.util.ArrayList;
+import android.os.CountDownTimer;
+
+import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -16,19 +22,46 @@ public class OwnedHuntActivity extends Activity{
 	private ExpandableListView mExpandableList;
 	private ExpandableListAdapter adapter;
 	private ArrayList<Group> groups;
-
+	TextView timer;
+	Button createObjective;
+	Button startHunt;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_owned_hunt);
+
+		createObjective=(Button)this.findViewById(R.id.add_objective_button);
+		startHunt=(Button)this.findViewById(R.id.start_hunt_button);
+		timer=(TextView)this.findViewById(R.id.time_remaining_text);
 		mExpandableList = (ExpandableListView)findViewById(R.id.expandableListView);
 		groups = setGroups();
 		adapter = new OwnedExpandListAdapter(this, groups);
 		mExpandableList.setAdapter(adapter);
 
-		mExpandableList.setOnChildClickListener(new OnChildClickListener() {
+		startHunt.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Toast mess = Toast.makeText(OwnedHuntActivity.this, "Let the Hunt Begin!", Toast.LENGTH_SHORT);
+				mess.show();
+				new CountDownTimer(30000, 1000) {
+					public void onTick(long millisUntilFinished) {
+						timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+					}
+					public void onFinish() {
+						timer.setText("Time is up!");
+					}
+				}.start();
+			}
+		});  
 
+		createObjective.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent create = new Intent(getApplicationContext(), CreateObjectiveActivity.class);
+				startActivity(create);
+			}
+		});    
+
+		mExpandableList.setOnChildClickListener(new OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView arg0, View arg1, int arg2, int arg3, long arg4)
 			{
@@ -36,12 +69,11 @@ public class OwnedHuntActivity extends Activity{
 			}
 		});
 
-		mExpandableList.setOnGroupClickListener(new OnGroupClickListener()
-		{
+		mExpandableList.setOnGroupClickListener(new OnGroupClickListener() {
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v,
 					int groupPosition, long id) {
-						return false;
+				return false;
 			}
 		});
 	}
@@ -49,7 +81,7 @@ public class OwnedHuntActivity extends Activity{
 	public ArrayList<Group> setGroups() {
 		ArrayList<Group> groupList = new ArrayList<Group>();
 		ArrayList<Child> childList = new ArrayList<Child>();
-		
+
 		Group gru1 = new Group();
 		gru1.setTitle("Objectives");
 		Child ch1_1 = new Child("Scottie Dog", "1");
@@ -73,7 +105,7 @@ public class OwnedHuntActivity extends Activity{
 		childList.add(ch2_4);
 		childList.add(ch2_5);
 		gru2.setArrayChildren(childList);
-				
+
 		groupList.add(gru1);
 		groupList.add(gru2);
 		return groupList;
