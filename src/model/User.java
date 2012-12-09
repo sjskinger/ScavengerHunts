@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class User implements Serializable {
 
@@ -9,7 +10,7 @@ public class User implements Serializable {
 	private String name;
 	private String email;
 	private String password;
-	private int[] huntsId;
+	private ArrayList<Integer> huntsId;
 	public static int count = 0;
 	
 	public User() {
@@ -45,10 +46,10 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int[] getHuntsId() {
+	public ArrayList<Integer> getHuntsId() {
 		return huntsId;
 	}
-	public void setHuntsId(int[] hunts_id) {
+	public void setHuntsId(ArrayList<Integer> hunts_id) {
 		this.huntsId = hunts_id;
 	}
 }

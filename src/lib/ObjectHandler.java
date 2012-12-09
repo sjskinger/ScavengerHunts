@@ -53,7 +53,6 @@ public class ObjectHandler implements Serializable {
 		new File(root, DATATYPE_USER).mkdir();
 		new File(root, DATATYPE_HUNT).mkdir();
 		new File(root, DATATYPE_OBJECTIVE).mkdir();
-		
 	}
 	
 	public Object readObject(String type, int id) {
@@ -66,7 +65,6 @@ public class ObjectHandler implements Serializable {
 		} else {
 			return readFile(f);
 		}
-		
 	}
 	
 	private Object readFile(File f) {

@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import android.text.format.Time;
 
@@ -12,8 +13,8 @@ public class Hunt implements Serializable{
 	private int hostId;
 	private Time timeStarted;
 	private float duration;
-	private int[] participantId;
-	private int[] objectiveId;
+	private ArrayList<Integer> participantId = new ArrayList<Integer>();
+	private ArrayList<Integer> objectiveId = new ArrayList<Integer>();
 	public static int count = 0;
 	
 	public Hunt() {
@@ -48,16 +49,16 @@ public class Hunt implements Serializable{
 	public void setDuration(float duration) {
 		this.duration = duration;
 	}
-	public int[] getParticipantId() {
+	public ArrayList<Integer> getParticipantId() {
 		return participantId;
 	}
-	public void setParticipantId(int[] participantId) {
+	public void setParticipantId(ArrayList<Integer> participantId) {
 		this.participantId = participantId;
 	}
-	public int[] getObjectiveId() {
+	public ArrayList<Integer> getObjectiveId() {
 		return objectiveId;
 	}
-	public void setObjectiveId(int[] objectiveId) {
+	public void setObjectiveId(ArrayList<Integer> objectiveId) {
 		this.objectiveId = objectiveId;
 	}
 	
