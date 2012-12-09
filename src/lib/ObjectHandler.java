@@ -55,10 +55,18 @@ public class ObjectHandler implements Serializable {
 		new File(root, DATATYPE_OBJECTIVE).mkdir();
 	}
 	
+	public void delete(String type, int id) {
+		String path = type + "/" + type + id + ".bin";
+		File f = new File(root, path);
+		if(f.exists())
+			f.delete();
+		return;
+	}
+	
 	public Object readObject(String type, int id) {
 		//get the serialized object from the appropriate file and deserialize it.
 		
-		String path = type + "/"+id+".bin";
+		String path = type + "/" + type + id + ".bin";
 		File f = new File(root, path);
 		if(!f.exists()) {
 			return null;
