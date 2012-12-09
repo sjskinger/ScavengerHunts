@@ -113,7 +113,7 @@ public class HomeActivity extends Activity {
 		huntsIOwn.setTitle("Hunts I Own");
 
 		try{
-			int [] hunts = user.getHuntsId();
+			ArrayList<Integer> hunts = user.getHuntsId();
 			if(hunts != null){
 				for(int id : hunts){
 					Hunt h = (Hunt) handler.readObject("user", id);				
