@@ -34,6 +34,7 @@ public class HomeActivity extends Activity {
 	Button huntsIOwn;
 	Button huntsImIn;
 	Button createAHunt;
+	Button account;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +55,22 @@ public class HomeActivity extends Activity {
 		}
 
 		createAHunt=(Button)this.findViewById(R.id.create_hunt);
-
+		account=(Button)this.findViewById(R.id.btnAccount);
 		mExpandableList = (ExpandableListView)findViewById(R.id.expandableListView);
 		groups = setGroups();
 		adapter = new InExpandListAdapter(this, groups);
 		mExpandableList.setAdapter(adapter);
 
+		account.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent create = new Intent(getApplicationContext(), AcctInfoActivity.class);
+				create.putExtra("userInfo", user);
+				startActivity(create);
+			}
+			
+		});
 		createAHunt.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent create = new Intent(getApplicationContext(), OwnedHuntActivity.class);

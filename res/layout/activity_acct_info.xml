@@ -11,25 +11,35 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="21dp"
-        android:text="TextView" />
+        android:text="@string/acct" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewPassword"
+        android:layout_below="@+id/textViewName"
+        android:layout_marginTop="34dp"
+        android:text="@string/login" />
+    
+    <TextView
+        android:id="@+id/textViewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewEmail"
+        android:layout_below="@+id/textViewName"
+        android:layout_marginTop="98dp"
+        android:text="@string/password" />
+
+    <TextView
+        android:id="@+id/textViewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="34dp"
-        android:text="TextView" />
+        android:layout_below="@+id/textViewPassword"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/email" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="23dp"
-        android:text="TextView" />
 
 </RelativeLayout>

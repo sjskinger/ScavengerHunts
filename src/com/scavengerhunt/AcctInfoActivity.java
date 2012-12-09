@@ -1,8 +1,11 @@
 package com.scavengerhunt;
 
+import model.User;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.widget.TextView;
 
 public class AcctInfoActivity extends Activity {
 
@@ -10,6 +13,14 @@ public class AcctInfoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_acct_info);
+		Intent i = getIntent();
+		User u = (User) i.getSerializableExtra("userInfo");
+		TextView name = (TextView) findViewById(R.id.textViewName);
+		TextView email = (TextView) findViewById(R.id.textViewEmail);
+		TextView password = (TextView) findViewById(R.id.textViewPassword);
+		name.setText("Full Name: " + u.getName());
+		email.setText("Full Name: " + u.getEmail());
+		password.setText("Full Name: " + u.getPassword());
 	}
 
 	@Override

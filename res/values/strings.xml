@@ -22,4 +22,10 @@
     <string name="addPhotoGallery">Add photo from the gallery</string>
     <string name="addPhotoCamera">Take photo from the camera</string>
     <string name="create">Create</string>
+    <string name="acct">Account Info</string>
+    <string name="title_activity_complete_objective">CompleteObjectiveActivity</string>
+    <string name="complete">Complete</string>
+    <string name="lat">Latitude</string>
+    <string name="lon">Longitude</string>
+
 </resources>
