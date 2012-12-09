@@ -32,7 +32,7 @@
     <string name="createhunt">Create a hunt</string>
     <string name="addparticipant">Add New Participant</string>
     <string name="createobjective">Create New Objective</string>
-    <string name="setduration">Set Duration</string>
+    <string name="setduration">Set Duration(in min.)</string>
     <string name="starthunt">Start Hunt</string>
     <string name="deletehunt">Delete Hunt</string>
     

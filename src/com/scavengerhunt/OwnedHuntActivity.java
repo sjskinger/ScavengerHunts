@@ -37,9 +37,12 @@ public class OwnedHuntActivity extends Activity{
 	Button startHunt;
 	Button addParticipant;
 	EditText par;
+	EditText duration;
 	ObjectHandler handler;
+	Button setTimeButton;
 	User user;
 	Time time;
+	long durationCounter = 0;
 	int huntID;
 	Hunt hunt;
 	Objective obj;
@@ -70,42 +73,61 @@ public class OwnedHuntActivity extends Activity{
 		createObjective =  (Button)this.findViewById(R.id.add_objective_button);
 		startHunt = (Button)this.findViewById(R.id.start_hunt_button);
 		addParticipant = (Button)this.findViewById(R.id.add_participant_button);
+		setTimeButton = (Button)this.findViewById(R.id.set_time_button);
 		par = (EditText) this.findViewById(R.id.add_participant_box);
 		timer = (TextView)this.findViewById(R.id.time_remaining_text);
 		mExpandableList = (ExpandableListView)findViewById(R.id.expandableListView);
-
+		duration = (EditText)findViewById(R.id.durationEditText);
+		
 
 		groups = setGroups();
 		adapter = new OwnedExpandListAdapter(this, groups);
 		mExpandableList.setAdapter(adapter);
 
+		setTimeButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				durationCounter = Integer.parseInt(duration.getText().toString());
+				durationCounter = durationCounter*60000;
+				duration.setText("");
+			}
+			
+		});
+		
 		startHunt.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				time = new Time(Time.getCurrentTimezone());
 				time.setToNow();
-
-				if ((hunt.getObjectiveId().size() < 1) || (hunt.getParticipantId().size() < 2)){
-					Toast.makeText(OwnedHuntActivity.this, "A hunt must have at least one objective and two participants!", Toast.LENGTH_SHORT).show();
+				
+				if (durationCounter == 0) {
+					Toast.makeText(OwnedHuntActivity.this, "Please add a positive duration to the hunt.", Toast.LENGTH_LONG).show();
 					return;
 				}
-
+				
+				if(hunt.getTimeStarted() == null) {
+					hunt.setTimeStarted(time);
+				}
+				
 				if (hunt.getTimeStarted().before(time)){
 					Toast.makeText(OwnedHuntActivity.this, "This hunt has already started!", Toast.LENGTH_SHORT).show();
 					return;
 				}
-
+				
+				
 				Toast.makeText(OwnedHuntActivity.this, "Let the Hunt Begin!", Toast.LENGTH_SHORT).show();
 				time.setToNow();
 				hunt.setTimeStarted(time);
-				new CountDownTimer(30000, 1000) {
+				new CountDownTimer(durationCounter, 1000) {
 					public void onTick(long millisUntilFinished) {
-						timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+						timer.setText("seconds remaining: " + (long)millisUntilFinished / 1000);
 					}
 					public void onFinish() {
 						timer.setText("Time is up!");
 					}
 				}.start();
 				handler.writeObject("hunt", hunt.getId(), hunt);
+				
 			}
 		});  
 
@@ -142,6 +164,7 @@ public class OwnedHuntActivity extends Activity{
 					Toast.makeText(OwnedHuntActivity.this, "User is not recognized. Addding in via email.", Toast.LENGTH_SHORT).show();
 					adapter.addChild(ch, participants);
 					handler.writeObject("hunt", hunt.getId(), hunt);
+					par.setText("");
 			}
 		}); 
 
