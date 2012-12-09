@@ -14,8 +14,8 @@
     <string name="person_name">Full Name</string>
     <string name="title_activity_home">Home</string>
     <string name="title_activity_acct_info">AcctInfo</string>
-    <string name="title_activity_owned_hunt">OwnedHunt</string>
-    <string name="title_activity_participant_hunt">ParticipantHunt</string>
+    <string name="title_activity_owned_hunt">Owned Hunt</string>
+    <string name="title_activity_participant_hunt">Participant Hunt</string>
     <string name="title_activity_create_objective">Create an Objective</string>
     <string name="objectiveName">Name of the Objective</string>
     <string name="description">Description</string>
@@ -23,9 +23,19 @@
     <string name="addPhotoCamera">Take photo from the camera</string>
     <string name="create">Create</string>
     <string name="acct">Account Info</string>
+    <string name="account">Account</string>
     <string name="title_activity_complete_objective">CompleteObjectiveActivity</string>
     <string name="complete">Complete</string>
     <string name="lat">Latitude</string>
     <string name="lon">Longitude</string>
+    <string name="nameyourhunt">Name Your Hunt</string>
+    <string name="createhunt">Create a hunt</string>
+    <string name="addparticipant">Add New Participant</string>
+    <string name="createobjective">Create New Objective</string>
+    <string name="setduration">Set Duration</string>
+    <string name="starthunt">Start Hunt</string>
+    <string name="deletehunt">Delete Hunt</string>
+    
+    
 
 </resources>

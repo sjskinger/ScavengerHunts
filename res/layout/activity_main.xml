@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
-                android:contentDescription="image"
+                android:contentDescription="@string/hello_world"
                 android:src="@drawable/ic_launcher" />
 
             <!-- Logo Ends -->

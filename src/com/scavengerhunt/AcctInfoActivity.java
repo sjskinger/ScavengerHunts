@@ -19,8 +19,8 @@ public class AcctInfoActivity extends Activity {
 		TextView email = (TextView) findViewById(R.id.textViewEmail);
 		TextView password = (TextView) findViewById(R.id.textViewPassword);
 		name.setText("Full Name: " + u.getName());
-		email.setText("Full Name: " + u.getEmail());
-		password.setText("Full Name: " + u.getPassword());
+		email.setText("Email id: " + u.getEmail());
+		password.setText("Password: " + u.getPassword());
 	}
 
 	@Override

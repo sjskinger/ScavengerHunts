@@ -134,6 +134,7 @@
                 android:id="@+id/completingObjectiveImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/hello_world"
                 android:layout_gravity="center_horizontal" />
 
         </LinearLayout>

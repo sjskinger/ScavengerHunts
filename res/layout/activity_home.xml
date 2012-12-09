@@ -1,49 +1,59 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".HomeActivity" >
 
-    <TextView
-        android:id="@+id/welcomeString"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="@string/hello_world" />
-
-    <Button
-        android:id="@+id/btnAccount"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/welcomeString"
-        android:layout_alignBottom="@+id/welcomeString"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="17dp"
-        android:text="Account" />
-
-    <ExpandableListView
-        android:id="@+id/expandableListView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button1"
-        android:cacheColorHint="#00000000"
-        android:fitsSystemWindows="false"
-        android:listSelector="@android:color/transparent"
-        android:scrollbars="vertical"
-        android:transcriptMode="disabled" >
-    </ExpandableListView>
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/welcomeString"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:text="@string/hello_world"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnAccount"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="17dp"
+            android:text="@string/account" />
+    </LinearLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.39"
+        tools:context=".HomeActivity" >
+
+        <ExpandableListView
+            android:id="@+id/expandableListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:cacheColorHint="#00000000"
+            android:fitsSystemWindows="false"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="vertical"
+            android:transcriptMode="disabled" >
+        </ExpandableListView>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/create_hunt"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/expandableListView"
-        android:layout_centerHorizontal="true"
-        android:text="Create A Hunt" />
+        android:layout_weight="0.01"
+        android:text="@string/createhunt" />
 
-
-</RelativeLayout>
+</LinearLayout>

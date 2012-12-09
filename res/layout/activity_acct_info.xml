@@ -1,15 +1,16 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".AcctInfoActivity" >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="21dp"
         android:text="@string/acct" />
 
@@ -17,29 +18,25 @@
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewPassword"
-        android:layout_below="@+id/textViewName"
-        android:layout_marginTop="34dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
         android:text="@string/login" />
-    
-    <TextView
-        android:id="@+id/textViewPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewEmail"
-        android:layout_below="@+id/textViewName"
-        android:layout_marginTop="98dp"
-        android:text="@string/password" />
 
     <TextView
         android:id="@+id/textViewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewPassword"
-        android:layout_marginLeft="31dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="40dp"
         android:text="@string/email" />
 
+    <TextView
+        android:id="@+id/textViewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:text="@string/password" />
 
-</RelativeLayout>
+</LinearLayout>
